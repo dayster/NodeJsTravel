@@ -8,10 +8,23 @@ const Testimonials = require('../models/Testimonials');
 
 module.exports = function(){
     // homepage url
+    
+    
+    
     router.get('/', (req, res) => {
-        res.render('index', {
-            pageTitle: 'Home'
-        });
+        const promises = [];
+
+        promises.push(Travels.findAll({limit: 3}));
+        promises.push(Testimonials.findAll({limit: 3}));
+
+        const result = Promise.all(promises);
+        
+        result.then(result => res.render('index', {
+            pageTitle: 'Home',
+            className: 'home',
+            travels: result[0],
+            testimonials: result[1]
+        }));
     });
 
     // about us url
@@ -47,7 +60,7 @@ module.exports = function(){
             .then(testimonials => res.render('testimonials', {
                pageTitle: 'Testimonials',
                testimonials 
-            }))
+            }));
      });
 
      router.post('/testimonials', (req, res) => {
@@ -68,13 +81,15 @@ module.exports = function(){
 
         // Show Errors
         if(errors.length > 0){
-            res.render('testimonials', {
+            Testimonials.findAll()
+                .then(testimonials => res.render('testimonials', {
                 pageTitle: 'Testimonials',
                 errors,
                 name,
                 email,
-                message
-            });
+                message,
+                testimonials 
+                }));
         }else{
         // Save Database
             Testimonials.create({

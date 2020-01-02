@@ -1,4 +1,30 @@
 extends ../layout/index
-
+block slider
+    .slider
+        h1 Rio de Janeiro
+        em adventure
 block content
-    h1 Hello Home
+    main.container.mt-5
+        h2.text-center.mb-5 About Us
+        .row.mb-5
+            .col-md-6
+                p It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
+                p It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
+            .col-md-6
+                img(src="/img/about_home.jpg", alt="About Us Image", class="img-fluid")
+        h2.text-center.mb-5 Upcoming Travels
+        include ../layout/partials/travels
+        .discount 
+            .container
+                .row.mb-5
+                    .col-md-6
+                        .content
+                            h3 5% OFF
+                            p.title Travel to Canada
+                            p.date 20Th Auguest 2019 - 28th August 2019
+                            p.price $2,500 USD
+        .container
+            h2.text-center.my-5 Testimonials
+            include ../layout/partials/testimonials
+        
+            

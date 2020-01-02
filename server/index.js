@@ -38,6 +38,8 @@ app.use(express.static('public'));
 app.use((req, res, next) => {
     const date = new Date();
     res.locals.currentYear = date.getFullYear();
+    res.locals.currentPath = req.path;
+    
     return next();
 });
 
